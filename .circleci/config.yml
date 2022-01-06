@@ -44,7 +44,7 @@ jobs:
 
       - run:
           name: Build and push Docker image
-          command:
+          command: |
             docker build -t oc-lettings-build:latest .
             echo $DOCKERHUB_PASSORWD | docker login --username $DOCKERHUB_LOGIN --password-stdin
             docker push dylanpecqueux/oc-lettings-build:latest
