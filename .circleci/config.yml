@@ -51,6 +51,7 @@ jobs:
           command: |
             docker build -t oc-lettings-build:latest .
             docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+            docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:latest
             docker push dylanpecqueux/oc-lettings-build:latest
 
 # Invoke jobs via workflows
