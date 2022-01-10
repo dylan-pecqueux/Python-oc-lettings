@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@1.2
+  heroku: circleci/heroku@0.0.10
 
 jobs:
   test:
@@ -58,3 +59,11 @@ workflows:
           filters:
               branches:
                 only: master
+
+      - heroku/deploy-via-git:
+          requires:
+            - test
+            - build
+          filters:
+            branches:
+              only: master
