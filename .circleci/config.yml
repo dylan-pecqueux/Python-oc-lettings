@@ -5,6 +5,24 @@ orbs:
   heroku: circleci/heroku@0.0.10
 
 jobs:
+  lint:
+    docker:
+      - image: cimg/python:3.8
+
+        auth:
+            username: dylanpecqueux
+            password: $DOCKERHUB_PASSWORD
+
+    steps:
+      - checkout
+
+      - python/install-packages:
+          pkg-manager: pip
+
+      - run:
+          name: Run flake8
+          command: flake8
+
   test:
     docker:
       - image: cimg/python:3.8
@@ -51,6 +69,8 @@ jobs:
 workflows:
   test-build:
     jobs:
+      - lint
+
       - test
 
       - build:

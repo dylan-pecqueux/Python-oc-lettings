@@ -27,7 +27,7 @@ def test_display_url_in_letting(client, add_data):
 
 
 @pytest.mark.django_db
-def test_display_url_in_letting(client, add_data):
+def test_display_content_in_letting(client, add_data):
     response = client.get(reverse("profiles:profile", args=["4meRomance"]))
     assert b"First name: John" in response.content
     assert b"Last name: Rodriguez" in response.content
