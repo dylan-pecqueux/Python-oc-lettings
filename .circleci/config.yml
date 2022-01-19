@@ -75,6 +75,7 @@ workflows:
 
       - build:
           requires:
+              - lint
               - test
           filters:
               branches:
@@ -82,6 +83,7 @@ workflows:
 
       - heroku/deploy-via-git:
           requires:
+            - lint
             - test
             - build
           filters:
