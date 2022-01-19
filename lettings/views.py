@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import Letting
 
-
 # Aenean leo magna, vestibulum et tincidunt fermentum, consectetur quis velit.
 # Sed non placerat massa.
 # Integer est nunc, pulvinar a tempor et, bibendum id arcu.
