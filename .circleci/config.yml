@@ -76,6 +76,8 @@ workflows:
       - test
 
       - build:
+          tags:
+              only: /^v.*/
           requires:
               - lint
               - test
