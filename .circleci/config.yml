@@ -45,7 +45,6 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.8
-      image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
 
         auth:
             username: $DOCKERHUB_LOGIN
