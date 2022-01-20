@@ -64,7 +64,8 @@ jobs:
           command: |
             docker build -t oc-lettings-build:latest .
             docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
-            docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:latest
+            IMAGE_TAG=${CIRCLE_TAG/v/''}
+            docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:$IMAGE_TAG
             docker push dylanpecqueux/oc-lettings-build:latest
 
 workflows:
@@ -75,8 +76,6 @@ workflows:
       - test
 
       - build:
-          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
-          update-description: true
           requires:
               - lint
               - test
