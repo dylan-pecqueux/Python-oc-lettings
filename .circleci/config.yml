@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   heroku: circleci/heroku@0.0.10
+  docker: circleci/docker@2.0.1
 
 jobs:
   lint:
@@ -74,6 +75,8 @@ workflows:
       - test
 
       - build:
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          update-description: true
           requires:
               - lint
               - test
