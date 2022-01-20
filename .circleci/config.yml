@@ -45,6 +45,7 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.8
+      image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
 
         auth:
             username: $DOCKERHUB_LOGIN
@@ -62,11 +63,10 @@ jobs:
       - run:
           name: Build and push Docker image
           command: |
-            echo docker build -t oc-lettings-build:latest .
+            docker build -t oc-lettings-build:latest .
             docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
-            IMAGE_TAG=${CIRCLE_TAG/v/''}
-            docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:$IMAGE_TAG
-            docker push dylanpecqueux/oc-lettings-build:latest
+            docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
+            docker push dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
 
 workflows:
   test-build:
@@ -80,8 +80,6 @@ workflows:
               - lint
               - test
           filters:
-              tags:
-                only: /^v.*/s
               branches:
                 only: master
 
