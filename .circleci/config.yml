@@ -10,7 +10,7 @@ jobs:
       - image: cimg/python:3.8
 
         auth:
-            username: dylanpecqueux
+            username: $DOCKERHUB_LOGIN
             password: $DOCKERHUB_PASSWORD
 
     steps:
@@ -28,7 +28,7 @@ jobs:
       - image: cimg/python:3.8
 
         auth:
-            username: dylanpecqueux
+            username: $DOCKERHUB_LOGIN
             password: $DOCKERHUB_PASSWORD
 
     steps:
@@ -46,7 +46,7 @@ jobs:
       - image: cimg/python:3.8
 
         auth:
-            username: dylanpecqueux
+            username: $DOCKERHUB_LOGIN
             password: $DOCKERHUB_PASSWORD
 
     steps:
