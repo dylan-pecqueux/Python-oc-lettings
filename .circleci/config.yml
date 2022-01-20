@@ -76,12 +76,12 @@ workflows:
       - test
 
       - build:
-          tags:
-              only: /^v.*/
           requires:
               - lint
               - test
           filters:
+              tags:
+                only: /^v.*/s
               branches:
                 only: master
 
