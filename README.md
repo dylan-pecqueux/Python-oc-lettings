@@ -100,7 +100,7 @@ Lorque l'on push sur la branche master la pipeline va, si les tests et linter ne
 
 ### Premier deploiement heroku
 
-- Créer un projet heroku : `heroku create <name-off-app>`
+- Créer un projet heroku : `heroku create <name-of-app>`
 - Aller dans les settings de votre projet précédemment généré sur votre espace du site heroku, dans config vars ajouter la variable SECRET_KEY et SENTRY_URL
 - Push le projet sur heroku : `git push heroku master`
 - Effectuer les migrations sur heroku : `heroku run python manage.py migrate`
