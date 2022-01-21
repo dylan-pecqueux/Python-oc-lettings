@@ -79,11 +79,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build and push docker image to Heroku
-          command: |
-            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
-            docker tag dylanpecqueux/oc-lettings-build:$CIRCLE_SHA1 registry.heroku.com/$HEROKU_APP_NAME/web
-            docker push registry.heroku.com/$HEROKU_APP_NAME/web
+        name: Build and push docker image to Heroku
+        command: |
+          docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
+          docker tag dylanpecqueux/oc-lettings-build:$CIRCLE_SHA1 registry.heroku.com/$HEROKU_APP_NAME/web
+          docker push registry.heroku.com/$HEROKU_APP_NAME/web
 
 workflows:
   test-build:
