@@ -71,11 +71,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Build and push docker image to Heroku
-        command: |
-          HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
-          HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
-          HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
+          name: Build and push docker image to Heroku
+          command: |
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
 
 workflows:
   test-build:
@@ -92,7 +92,7 @@ workflows:
               branches:
                 only: master
 
-      - heroku/deploy-via-git:
+      - deploy:
           requires:
             - lint
             - test
