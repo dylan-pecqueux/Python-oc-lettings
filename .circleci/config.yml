@@ -75,10 +75,9 @@ jobs:
             username: $DOCKERHUB_LOGIN
             password: $DOCKERHUB_PASSWORD
     
-    machine: True
     steps:
       - checkout
-      
+
       - run:
           name: Build and push docker image to Heroku
           command: |
