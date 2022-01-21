@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   docker: circleci/docker@2.0.1
-  heroku: circleci/heroku@1.2.6
 
 jobs:
   lint:
@@ -52,9 +51,7 @@ jobs:
 
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      
+
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
@@ -86,7 +83,7 @@ jobs:
           name: Build and push docker image to Heroku
           command: |
             docker login -u $HEROKU_LOGIN -p $HEROKU_API_KEY registry.heroku.com
-            docker build -t registry.heroku.com/${HEROKU_APP_NAME}/web .
+            docker tag oc-lettings-build:latest registry.heroku.com/$HEROKU_APP_NAME/web
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
 
 workflows:
