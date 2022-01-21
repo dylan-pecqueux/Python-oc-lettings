@@ -9,6 +9,8 @@ Site web d'Orange County Lettings
 - Compte GitHub avec accès en lecture à ce repository
 - Git CLI
 - SQLite3 CLI
+- Compte Heroku
+- Compte Sentry
 - Interpréteur Python, version 3.6 ou supérieure
 
 Dans le reste de la documentation sur le développement local, il est supposé que la commande `python` de votre OS shell exécute l'interpréteur Python ci-dessus (à moins qu'un environnement virtuel ne soit activé).
@@ -38,6 +40,8 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - `source venv/bin/activate`
 - `pip install --requirement requirements.txt`
 - `python manage.py runserver`
+- Générer une secret_key : [Djecrety](https://djecrety.ir/)
+- Créer un fichier .env à la racine du projet et y mettre la clé généré dans une variable SECRET_KEY
 - Aller sur `http://localhost:8000` dans un navigateur.
 - Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
 
@@ -75,3 +79,34 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+## Deploiement 
+
+### Fonctionnement
+
+La pipeline circleci permet lorsque l'on push une branche sur github de lancer les tests et le linter.  
+Lorque l'on push sur la branche master la pipeline va, si les tests et linter ne soulève pas d'erreurs, effectuer une image docker du projet qui sera archiver sur docker hub puis si la tache de conteunarisation a fonctionnée va lancer le deploiement sur Heroku.
+
+### Configuration requise
+
+- Un compte circleci lié au compte github
+- Un compte heroku
+- Ajouter dans votre projet sur circleci les variables d'environement suivantes :
+                        - DOCKERHUB_LOGIN
+                        - DOCKERHUB_PASSWORD
+                        - HEROKU_API_KEY
+                        - HEROKU_APP_NAME
+
+### Premier deploiement heroku
+
+- Créer un projet heroku : `heroku create <name-off-app>`
+- Aller dans les settings de votre projet précédemment généré sur votre espace du site heroku, dans config vars ajouter la variable SECRET_KEY
+- Push le projet sur heroku : `git push heroku master`
+- Effectuer les migrations sur heroku : `heroku run python manage.py migrate`
+- Injecter les fixtures dans la db : `heroku run python manage.py loaddata fixtures usersandgroups.json`
+- Injecter la fixtures data : `heroku run python manage.py loaddata fixtures data.json`
+
+
+
+
+
