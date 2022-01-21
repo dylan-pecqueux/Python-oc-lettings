@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   docker: circleci/docker@2.0.1
+  heroku: circleci/heroku@1.2.6
 
 jobs:
   lint:
@@ -65,17 +66,6 @@ jobs:
             docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
             docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
             docker push dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
-  
-  deploy:
-    machine: True
-    steps:
-      - checkout
-      - run:
-          name: Build and push docker image to Heroku
-          command: |
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
 
 workflows:
   test-build:
@@ -92,7 +82,7 @@ workflows:
               branches:
                 only: master
 
-      - deploy:
+      - push-docker-image:
           requires:
             - lint
             - test
