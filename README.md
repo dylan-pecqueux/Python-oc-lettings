@@ -39,9 +39,10 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - `cd /path/to/Python-OC-Lettings-FR`
 - `source venv/bin/activate`
 - `pip install --requirement requirements.txt`
-- `python manage.py runserver`
 - Générer une secret_key : [Djecrety](https://djecrety.ir/)
 - Créer un fichier .env à la racine du projet et y mettre la clé généré dans une variable SECRET_KEY
+- Créer un projet Django sur Sentry et ajouter le dsn fournie par sentry à votre .env sous le nom de SENTRY_URL
+- `python manage.py runserver`
 - Aller sur `http://localhost:8000` dans un navigateur.
 - Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
 
@@ -100,11 +101,17 @@ Lorque l'on push sur la branche master la pipeline va, si les tests et linter ne
 ### Premier deploiement heroku
 
 - Créer un projet heroku : `heroku create <name-off-app>`
-- Aller dans les settings de votre projet précédemment généré sur votre espace du site heroku, dans config vars ajouter la variable SECRET_KEY
+- Aller dans les settings de votre projet précédemment généré sur votre espace du site heroku, dans config vars ajouter la variable SECRET_KEY et SENTRY_URL
 - Push le projet sur heroku : `git push heroku master`
 - Effectuer les migrations sur heroku : `heroku run python manage.py migrate`
-- Injecter les fixtures dans la db : `heroku run python manage.py loaddata fixtures usersandgroups.json`
-- Injecter la fixtures data : `heroku run python manage.py loaddata fixtures data.json`
+- Injecter les fixtures dans la db : `heroku run python manage.py loaddata fixtures/usersandgroups.json`
+- Injecter la fixtures data : `heroku run python manage.py loaddata fixtures/data.json`
+- Lancer la commande `heroku ps:scale web=1`
+- L'application devrait être accessible a l'url fournie par heroku
+
+## Sentry
+
+Vous pouvez vous rendre sur l'url /sentry-debug/ cela vous donnera une erreur et une issue devrait se créer concernant cette erreur dans votre espace sentry.
 
 
 
