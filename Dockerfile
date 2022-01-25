@@ -5,7 +5,6 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-RUN mkdir -p /code/staticfiles
 RUN python manage.py collectstatic --no-input
 COPY . /code/
 EXPOSE 8000
