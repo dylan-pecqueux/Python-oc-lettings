@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   docker: circleci/docker@2.0.1
+  heroku: circleci/heroku@1.2.6
 
 jobs:
   lint:
