@@ -6,5 +6,6 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 COPY . /code/
-EXPOSE 8000
+RUN mkdir -p /code/static
+RUN python manage.py collectstatic --no-input
 CMD gunicorn -b 0.0.0.0:$PORT oc_lettings_site.wsgi:application

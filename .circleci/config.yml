@@ -60,7 +60,7 @@ jobs:
       - run:
           name: Build and push Docker image
           command: |
-            docker build -t oc-lettings-build:latest .
+            docker build -f Dockerfile.build -t oc-lettings-build:latest .
             docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
             docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
             docker push dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
