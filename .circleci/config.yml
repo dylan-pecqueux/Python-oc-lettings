@@ -80,9 +80,6 @@ jobs:
           version: 19.03.13
           docker_layer_caching: true
 
-      - run: docker build .
-
-      # Deploy to Heroku
       - heroku/install
       - run: heroku container:login
       - heroku/push-docker-image:

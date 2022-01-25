@@ -85,18 +85,13 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 ### Fonctionnement
 
-La pipeline circleci permet lorsque l'on push une branche sur github de lancer les tests et le linter.  
-Lorque l'on push sur la branche master la pipeline va, si les tests et linter ne soulève pas d'erreurs, effectuer une image docker du projet qui sera archiver sur docker hub puis si la tache de conteunarisation a fonctionnée va lancer le deploiement sur Heroku.
+Le déploiement ce fait sur heroku où une image docker de notre application est envoyé ce qui permet de simplifier la mise en production et de retrouver le même environnement que en local ainsi que notre base de données. 
+
 
 ### Configuration requise
 
-- Un compte circleci lié au compte github
-- Un compte heroku
-- Ajouter dans votre projet sur circleci les variables d'environement suivantes :
-                        - DOCKERHUB_LOGIN
-                        - DOCKERHUB_PASSWORD
-                        - HEROKU_API_KEY
-                        - HEROKU_APP_NAME
+- Un compte heroku et heroku CLI
+- Docker CLI
 
 ### Deploiement heroku
 
@@ -105,7 +100,6 @@ Lorque l'on push sur la branche master la pipeline va, si les tests et linter ne
 - Aller dans les settings de votre projet précédemment généré sur votre espace du site heroku, dans config vars ajouter la variable SECRET_KEY et SENTRY_URL
 - Build une image docker et la push sur heroku : `heroku container:push web`
 - Release l'image : `heroku container:release web`
-- Lancer la commande `heroku ps:scale web=1`
 - L'application devrait être accessible a l'url fournie par heroku
 
 ## Sentry
