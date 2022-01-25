@@ -85,13 +85,13 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 ### Fonctionnement
 
-Le déploiement ce fait sur heroku où une image docker de notre application est envoyé ce qui permet de simplifier la mise en production et de retrouver le même environnement que en local ainsi que notre base de données. 
+Le déploiement ce fait sur heroku où une image docker de notre application est déployé ce qui permet de simplifier la mise en production et de retrouver le même environnement que en local ainsi que notre base de données et son contenu.
 
 
 ### Configuration requise
 
 - Un compte heroku et heroku CLI
-- Docker CLI
+- Un fichier Dockerfile (déjà présent)
 
 ### Deploiement heroku
 
