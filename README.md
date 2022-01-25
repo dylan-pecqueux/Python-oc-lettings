@@ -87,7 +87,6 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 Le déploiement ce fait sur heroku où une image docker de notre application est construite à partir du fichier Dockerfile, puis est déployé. Cela permet de simplifier la mise en production et de retrouver le même environnement que en local ainsi que notre base de données et son contenu.
 
-
 ### Configuration requise
 
 - Un compte heroku et heroku CLI
