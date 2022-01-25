@@ -2,8 +2,8 @@ version: 2.1
 
 orbs:
   python: circleci/python@1.2
-  heroku: circleci/heroku@0.0.10
   docker: circleci/docker@2.0.1
+  heroku: circleci/heroku@1.2.6
 
 jobs:
   lint:
@@ -52,9 +52,7 @@ jobs:
 
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      
+
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
@@ -66,6 +64,31 @@ jobs:
             docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
             docker tag oc-lettings-build:latest dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
             docker push dylanpecqueux/oc-lettings-build:${CIRCLE_SHA1}
+  
+  deploy:
+    docker:
+      - image: cimg/python:3.8
+
+        auth:
+            username: $DOCKERHUB_LOGIN
+            password: $DOCKERHUB_PASSWORD
+    
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+
+      - run: docker build .
+
+      # Deploy to Heroku
+      - heroku/install
+      - run: heroku container:login
+      - heroku/push-docker-image:
+          process-types: web
+      - heroku/release-docker-image:
+          process-types: web
 
 workflows:
   test-build:
@@ -82,7 +105,7 @@ workflows:
               branches:
                 only: master
 
-      - heroku/deploy-via-git:
+      - deploy:
           requires:
             - lint
             - test
