@@ -40,7 +40,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - `source venv/bin/activate`
 - `pip install --requirement requirements.txt`
 - Générer une secret_key : [Djecrety](https://djecrety.ir/)
-- Créer un fichier .env à la racine du projet et y mettre la clé généré dans une variable SECRET_KEY
+- Créer un fichier .env à la racine du projet et y mettre la clé générée dans une variable SECRET_KEY
 - Créer un projet Django sur Sentry et ajouter le dsn fournie par sentry à votre .env sous le nom de SENTRY_URL
 - `python manage.py runserver`
 - Aller sur `http://localhost:8000` dans un navigateur.
