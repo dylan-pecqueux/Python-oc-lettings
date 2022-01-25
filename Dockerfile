@@ -5,7 +5,8 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-RUN python manage.py collectstatic --no-input
 COPY . /code/
+RUN mkdir -p /code/staticfiles
+RUN python manage.py collectstatic --no-input
 EXPOSE 8000
 CMD gunicorn -b 0.0.0.0:$PORT oc_lettings_site.wsgi:application
