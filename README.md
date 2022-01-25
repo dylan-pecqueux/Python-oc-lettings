@@ -98,14 +98,13 @@ Lorque l'on push sur la branche master la pipeline va, si les tests et linter ne
                         - HEROKU_API_KEY
                         - HEROKU_APP_NAME
 
-### Premier deploiement heroku
+### Deploiement heroku
 
+- se connecter a heroku : `heroku container:login`
 - Créer un projet heroku : `heroku create <name-of-app>`
 - Aller dans les settings de votre projet précédemment généré sur votre espace du site heroku, dans config vars ajouter la variable SECRET_KEY et SENTRY_URL
-- Push le projet sur heroku : `git push heroku master`
-- Effectuer les migrations sur heroku : `heroku run python manage.py migrate`
-- Injecter les fixtures dans la db : `heroku run python manage.py loaddata fixtures/usersandgroups.json`
-- Injecter la fixtures data : `heroku run python manage.py loaddata fixtures/data.json`
+- Build une image docker et la push sur heroku : `heroku container:push web`
+- Release l'image : `heroku container:release web`
 - Lancer la commande `heroku ps:scale web=1`
 - L'application devrait être accessible a l'url fournie par heroku
 
