@@ -5,7 +5,6 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-COPY .env /code/
 COPY . /code/
 RUN mkdir -p /code/static
 RUN export $(SECRET_KEY .env) && python manage.py collectstatic --no-input
