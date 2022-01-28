@@ -103,4 +103,5 @@ Le déploiement ce fait sur heroku où une image docker de notre application est
 
 ## Sentry
 
+
 Vous pouvez vous rendre sur l'url /sentry-debug/ cela vous donnera une erreur et une issue devrait se créer concernant cette erreur dans votre espace sentry.
